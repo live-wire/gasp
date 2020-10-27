@@ -91,12 +91,7 @@ def getFieldSet(t, lls, reducer=statistics.mean):
         fields = fields + ("" if not len(fields) else ",") + s
     return fields
 
-p = Pool(8)
+p = Pool(4)
 
 print(p.map(processCell, times))
-# for i,t in enumerate(xds.time.values):
-#     if i%3 == 0:
-#         processCell(str(t), g.llats, g.llongs)
-#     if i%500==0:
-#         pr = (len(xds.time.values)-i)*100//len(xds.time.values)
-#         print("Pushed till:%s, Remaining: %d percent"%(t, pr))
+

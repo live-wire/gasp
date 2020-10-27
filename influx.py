@@ -6,7 +6,7 @@ from batcher import Batcher
 
 class InfluxClient:
 	def __init__(self, 
-		url = "http://167.71.69.167:8086",
+		url = "http://localhost:8086",
 		token = "IpLnoNkWhqmnSLO2ieeqmHejYrrokycO5Be8HRgM6UI1S_CO-Py2_opA2E1z6iCzJrv5U_gHGVHh5JMCFsgwjQ=="
 		):
 
