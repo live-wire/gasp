@@ -15,6 +15,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:3000",
+    "http://gasp.databake.nl"
 ]
 
 app.add_middleware(
