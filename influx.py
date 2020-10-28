@@ -17,7 +17,7 @@ class InfluxClient:
 
 		self.client = InfluxDBClient(url=url, token=token)
 		self.write_api = self.client.write_api(write_options=SYNCHRONOUS)
-		self.b = Batcher(500, 10, self._send)
+		self.b = Batcher(500, 5, self._send)
 		self.q = self.client.query_api()
 
 	def send(self, line):

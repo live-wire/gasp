@@ -35,8 +35,8 @@ class Grid:
 			for j,lo in enumerate(llongs):
 				cell = "cell_%d_%d"%(i,j)
 				if len(la) and len(lo):
-					self.grid[cell]['polygon'].append((la[0], lo[0]))
-					self.grid[cell]['polygon'].append((la[-1], lo[-1]))
+					self.grid[cell]['polygon'].append((float(la[0]), float(lo[0])))
+					self.grid[cell]['polygon'].append((float(la[-1]), float(lo[-1])))
 		self.llats = llats
 		self.llongs = llongs
 
