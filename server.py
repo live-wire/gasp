@@ -3,6 +3,7 @@ from typing import Optional
 from fastapi import FastAPI, HTTPException
 import uvicorn
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 from grid import Grid
 from influx import InfluxClient
 import xarray as xr
@@ -11,6 +12,18 @@ import datetime
 import numpy as np
 
 app = FastAPI()
+
+origins = [
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 app.mount("/dashboard", StaticFiles(directory="dashboard"), name="dashboard")
 
@@ -115,4 +128,4 @@ async def get_grid():
 	return ss.g.grid
 
 if __name__ == "__main__":
-	uvicorn.run(app, host="0.0.0.0", port=8000)
+	uvicorn.run(app, host="0.0.0.0", port=80)
