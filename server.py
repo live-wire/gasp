@@ -25,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/", StaticFiles(directory="dashboard"), name="dashboard")
+app.mount("/dashboard", StaticFiles(directory="dashboard"), name="dashboard")
 
 class ServerState:
 	def __init__(self):
@@ -88,8 +88,12 @@ class ServerState:
 
 ss = ServerState()
 
+@app.get("/")
+async def read_root():
+	return {"Gasp": "Venturewithair"}
 
-@app.get("/api/get")
+
+@app.get("/get")
 async def get_all_cells(timestamp: Optional[str] = None, field: str = None):
 	"""
 	- **timestamp**: timestamp is the current/provided timestamp. '%Y-%m-%dT%H:%M:%S'
@@ -115,11 +119,11 @@ async def get_all_cells(timestamp: Optional[str] = None, field: str = None):
 # Using precomputed ranges for UI
 # We don't need to compute ranges each time a request is made.
 # See xplore.ipynb for how the ranges were computed.
-@app.get("/api/ranges")
+@app.get("/ranges")
 async def get_ranges():
 	return ss.ranges
 
-@app.get("/api/grid")
+@app.get("/grid")
 async def get_grid():
 	return ss.g.grid
 
