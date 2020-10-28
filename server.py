@@ -110,5 +110,9 @@ async def get_all_cells(timestamp: Optional[str] = None, field: Optional[str] = 
 async def get_ranges():
 	return ss.ranges
 
+@app.get("/grid")
+async def get_grid():
+	return ss.g.grid
+
 if __name__ == "__main__":
 	uvicorn.run(app, host="0.0.0.0", port=8000)
