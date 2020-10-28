@@ -25,7 +25,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.mount("/dashboard", StaticFiles(directory="dashboard"), name="dashboard")
+app.mount("/", StaticFiles(directory="dashboard"), name="dashboard")
 
 class ServerState:
 	def __init__(self):
@@ -88,13 +88,9 @@ class ServerState:
 
 ss = ServerState()
 
-@app.get("/")
-async def read_root():
-	return {"Gasp": "Venturewithair"}
-
 
 @app.get("/get")
-async def get_all_cells(timestamp: Optional[str] = None, field: Optional[str] = None):
+async def get_all_cells(timestamp: Optional[str] = None, field: str = None):
 	"""
 	- **timestamp**: timestamp is the current/provided timestamp. '%Y-%m-%dT%H:%M:%S'
 	- **field**: Must be one of fmi_no, fmi_no2, fmi_pm10p0, fmi_pm2p5, fmi_rel_humid, 
@@ -126,6 +122,7 @@ async def get_ranges():
 @app.get("/grid")
 async def get_grid():
 	return ss.g.grid
+
 
 if __name__ == "__main__":
 	uvicorn.run(app, host="0.0.0.0", port=80)
